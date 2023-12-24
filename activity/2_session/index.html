@@ -107,7 +107,10 @@ let logbad = new Login(“pepe”, “bad”) // alert -&gt; <span class="hljs-k
                     <button class="custom-button" id="loginSuccessAsync">Login Async</button>
                     <button class="custom-button button-cancel" id="loginFailureAsync">Error Async</button>
                     <pre>
-<code class="language-javascript">// Ejercicio 1
+
+                    <code class="language-javascript">
+                        
+                        // Ejercicio 1
 
 // Ejercicio 2
 
@@ -117,19 +120,87 @@ let logbad = new Login(“pepe”, “bad”) // alert -&gt; <span class="hljs-k
 
 // Ejercicio 5
 
+
+<button id="loginSuccess">Login Success</button>
+<button id="loginFailure">Login Failure</button>
+
+<script>
+    const successButton = document.getElementById('loginSuccess');
+    const failureButton = document.getElementById('loginFailure');
+
+    successButton.addEventListener('click', () => {
+        let login = new Login('admin', 'passwd');
+        login.login();
+    });
+
+    failureButton.addEventListener('click', () => {
+        let login = new Login('diana', 'testerror');
+        login.login();
+    });
+
+    // Clase Login
+    class Login {
+        constructor(username, password) {
+            this.username = username;
+            this.password = password;
+        }
+
+        login() {
+            if (this.username === 'admin' && this.password === 'passwd') {
+                alert('Usuario logeado');
+            } else {
+                alert('Usuario o contraseña incorrectos');
+            }
+        }
+    }
+</script>
+
+
+
 // Ejercicio 6
 
-let loginWitUsername = (username, password) => {
-    return new Promise(function (resolve, rejected) {
-        setTimeout(() => {
-        if (username === "admin" && password === "passwd") {
-            resolve("User logged in");
-        } else {
-            rejected("Error: invalid username or password");
+    <button id="loginSuccessAsync">Login Success (Async)</button>
+    <button id="loginFailureAsync">Login Failure (Async)</button>
+
+    <script>
+        const successAsyncButton = document.getElementById('loginSuccessAsync');
+        const failureAsyncButton = document.getElementById('loginFailureAsync');
+
+        successAsyncButton.addEventListener('click', async () => {
+        try {
+            await loginWithUsername('admin', 'passwd');
+            alert('Usuario logeado (Async)');
+        } catch (error) {
+            alert('Usuario o contraseña incorrectos (Async)');
         }
-        }, 200);
-    });
-};</code>
+        });
+
+        // Función asíncrona para el click del botón de falla asincrónico
+        failureAsyncButton.addEventListener('click', async () => {
+        try {
+            await loginWithUsername('diana', 'testerror');
+            alert('Usuario logeado (Async)');
+        } catch (error) {
+            alert('Usuario o contraseña incorrectos (Async)');
+        }
+        });
+
+        // Función asincrónica para simular login con username y password
+        function loginWithUsername(username, password) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+            if (username === 'admin' && password === 'passwd') {
+                resolve();
+            } else {
+                reject(new Error('Usuario o contraseña incorrectos'));
+            }
+            }, 1000); // Simulación de un tiempo de espera
+        });
+        }
+    </script>
+
+
+</code>
 </pre>
 
         </div>
